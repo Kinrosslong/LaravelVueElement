@@ -167,6 +167,7 @@
                             </div>
                         </el-dialog>
                         <!-- Element Dialog对话框 -->
+                        <!--测试一下github-->
                     </div>
                 </div>
             </div>
@@ -243,12 +244,6 @@
         },
         mounted() {
             // console.log('Home 页面.')
-            // axios.get('/api/posts',{params:{pagesize:1,pagenum:10}} ).then(res => {
-            //     console.log(res);
-            //     this.posts = res.data.list;
-            //     console.log(res.data.count);
-            //     this.total = res.data.count;
-            // })
             this.initShow(1);
         },
         methods: {
