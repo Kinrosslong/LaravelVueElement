@@ -279,8 +279,13 @@
                     message: '已取消删除'
                 });          
                 });
+            },
+            submitForm() {
+                console.log('还没有写表单方法');
+            },
+            resetForm() {
+                console.log('重置表单方法');
             }
         }
-
     }
 </script>
