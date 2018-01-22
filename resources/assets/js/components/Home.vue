@@ -167,6 +167,7 @@
                             </div>
                         </el-dialog>
                         <!-- Element Dialog对话框 -->
+
                         <!--测试一下github-->
                     </div>
                 </div>
@@ -257,6 +258,7 @@
                     console.log(res);
                     this.posts = res.data.list;
                     this.total = res.data.count;
+                    console.log(this.posts);
                 })
             },
             edit() {
