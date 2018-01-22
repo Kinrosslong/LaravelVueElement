@@ -13,6 +13,7 @@ class PostController extends Controller
         // $users = DB::select('select * from posts');
         // $user = DB::select('select * from post where status = ?', [10]); //这样是有占位符的 比较安全 参数绑定可以避免 SQL 注入攻击
         // $user = DB::select('select * from post where status = :status', ['status' => 1]);
+        // dd($users);
         $pagesize = $request->input('pagesize');
         $pagenum = $request->input('pagenum');
         $num = ($pagenum - 1) * $pagesize;
