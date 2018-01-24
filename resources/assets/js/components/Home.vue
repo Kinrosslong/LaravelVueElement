@@ -254,7 +254,9 @@
                 console.log(this.formInline.user);
             },
             initShow(pagenum) {
-                axios.get('/api/posts',{params:{pagenum:pagenum, pagesize:this.pagesize}}).then(res => {
+                // axios.post('/api/posts',{params:{pagenum:pagenum, pagesize:this.pagesize}}).then(res => { //get请求
+                axios.post('/api/posts',{pagenum:pagenum, pagesize:this.pagesize}).then(res => { //post 请求
+                    
                     console.log(res);
                     this.posts = res.data.list;
                     this.total = res.data.count;
@@ -262,7 +264,7 @@
                 })
             },
             edit() {
-                this.dialogFormVisible = false;
+                // this.dialogFormVisible = false;
                 console.log();
             },
             MessageBox() { //弹框
