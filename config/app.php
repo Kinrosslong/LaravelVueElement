@@ -135,7 +135,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
+    //是加载应用程序的 服务提供器
     'providers' => [
 
         /*
