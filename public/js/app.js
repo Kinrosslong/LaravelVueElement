@@ -37267,7 +37267,10 @@ var str = 'abcdefghijklmn';
         initShow: function initShow(pagenum) {
             var _this = this;
 
-            axios.get('/api/posts', { params: { pagenum: pagenum, pagesize: this.pagesize } }).then(function (res) {
+            // axios.post('/api/posts',{params:{pagenum:pagenum, pagesize:this.pagesize}}).then(res => { //get请求
+            axios.post('/api/posts', { pagenum: pagenum, pagesize: this.pagesize }).then(function (res) {
+                //post 请求
+
                 console.log(res);
                 _this.posts = res.data.list;
                 _this.total = res.data.count;
@@ -37275,7 +37278,7 @@ var str = 'abcdefghijklmn';
             });
         },
         edit: function edit() {
-            this.dialogFormVisible = false;
+            // this.dialogFormVisible = false;
             console.log();
         },
         MessageBox: function MessageBox() {
