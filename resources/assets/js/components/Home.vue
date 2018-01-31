@@ -156,7 +156,7 @@
                                     <el-option label="区域二" value="beijing"></el-option>
                                 </el-select>
                                 </el-form-item>
-                                <el-form-item label="标题" :label-width="formLabelWidth">
+                                <el-form-item label="内容" :label-width="formLabelWidth">
                                     <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="dialogEdit.body">
                                     </el-input>
                                 </el-form-item>
@@ -202,9 +202,10 @@
                 pagesize: 5,
                 dialogFormVisible: false,
                 dialogEdit: {
+                    title: '',
                     name: '',
                     region: '',
-                    body:''
+                    body: ''
                 },
                 formLabelWidth: '120px',
                 ruleForm: {
@@ -265,7 +266,17 @@
             },
             edit() {
                 // this.dialogFormVisible = false;
-                console.log();
+                console.log(this.dialogEdit);
+                var formData = this.dialogEdit;
+                axios.post('/api/verify', formData).then(res => {
+                    console.log(456789123);
+                    // console.log(res.errors);
+                
+                    // console.log(res.response.status);
+                    // if() {
+
+                    // }
+                });
             },
             MessageBox() { //弹框
                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
