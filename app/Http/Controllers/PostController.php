@@ -10,6 +10,7 @@ class PostController extends Controller
 
     public function index(Request $request)
     {   
+        // return ['123','456'];
         // $users = DB::select('select * from posts');
         // $user = DB::select('select * from post where status = ?', [10]); //这样是有占位符的 比较安全 参数绑定可以避免 SQL 注入攻击
         // $user = DB::select('select * from post where status = :status', ['status' => 1]);
@@ -34,5 +35,44 @@ class PostController extends Controller
         $users = DB::table('posts')->get(); 
         dd($users);
         return $users;
+    }
+
+    /**
+     * 获取已定义的验证规则的错误消息。
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => '不能为空',
+            'body.required'  => '不能为空',
+            'name.required' => '不能为空', 
+        ];
+    }
+
+    public function verify(Request $request)
+    {    
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'body' => 'required',
+            // 'name' => 'required',
+            'body' => 'required',
+            'region' => 'required',
+        ]);
+
+        
+        // return response()->json([
+        //     'success' => true,
+        //     'status' => 200,
+        //     'msg' => 'ok'
+        // ]);
+    }
+
+
+    public function about()
+    {
+//        Request::
+
     }
 }

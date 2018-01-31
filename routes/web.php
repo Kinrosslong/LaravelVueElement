@@ -15,6 +15,12 @@
 //     return view('welcome'); //laravel welcome页面
 // });
 
+/*
+    laravel 原生路径  测试使用
+*/
+Route::get('/backend', 'BackendController@index');
+Route::get('/backend/demo', 'BackendController@demo');
+
 // Route::get('/posts', 'PostController@index'); //指定路由
 
 //去掉vue#号 匹配所以的字符串路由

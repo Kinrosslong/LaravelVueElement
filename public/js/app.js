@@ -37227,6 +37227,7 @@ var str = 'abcdefghijklmn';
             pagesize: 5,
             dialogFormVisible: false,
             dialogEdit: {
+                title: '',
                 name: '',
                 region: '',
                 body: ''
@@ -37279,7 +37280,17 @@ var str = 'abcdefghijklmn';
         },
         edit: function edit() {
             // this.dialogFormVisible = false;
-            console.log();
+            console.log(this.dialogEdit);
+            var formData = this.dialogEdit;
+            axios.post('/api/verify', formData).then(function (res) {
+                console.log(456789123);
+                // console.log(res.errors);
+
+                // console.log(res.response.status);
+                // if() {
+
+                // }
+            });
         },
         MessageBox: function MessageBox() {
             var _this2 = this;
@@ -37952,7 +37963,7 @@ var render = function() {
                         "el-form-item",
                         {
                           attrs: {
-                            label: "标题",
+                            label: "内容",
                             "label-width": _vm.formLabelWidth
                           }
                         },

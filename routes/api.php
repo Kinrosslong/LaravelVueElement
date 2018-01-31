@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::get('/posts', 'PostController@index'); get请求
 Route::post('/posts', 'PostController@index'); //post请求
 Route::get('/posts/{post}', 'PostController@show');
+Route::post('/verify', 'PostController@verify'); //测试Laravel validate 表单验证
