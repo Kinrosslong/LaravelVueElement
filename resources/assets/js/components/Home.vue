@@ -270,11 +270,6 @@
                 var formData = this.dialogEdit;
                 axios.post('/api/verify', formData).then(res => {
                     console.log(res);
-                
-                    // console.log(res.response.status);
-                    // if() {
-
-                    // }
                 });
             },
             MessageBox() { //弹框
