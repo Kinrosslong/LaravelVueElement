@@ -269,8 +269,7 @@
                 console.log(this.dialogEdit);
                 var formData = this.dialogEdit;
                 axios.post('/api/verify', formData).then(res => {
-                    console.log(456789123);
-                    // console.log(res.errors);
+                    console.log(res);
                 
                     // console.log(res.response.status);
                     // if() {
