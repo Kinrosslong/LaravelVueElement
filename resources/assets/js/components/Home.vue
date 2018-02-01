@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" >
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -35,6 +35,7 @@
                         </el-form>
 
                         <el-tag type="danger">Tag标签</el-tag>
+                        <el-button type="primary"  @click="loading" v-loading.fullscreen.lock="fullscreenLoading">Loading加载</el-button>
                     </div>
 
                     <!--传统方式 遍历数据 渲染表格-->
@@ -56,7 +57,7 @@
                                     <td>{{post.body}}</td>
                                     <td>{{post.create_at}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-success" @click="dialogFormVisible = true">编辑</button>
+                                        <button type="button" class="btn btn-success" @click="showTableDialog(post)">编辑</button>
                                         <button type="button" class="btn btn-danger">删除</button>
 
                                         <el-button type="primary">这是element按钮上传</el-button>
@@ -67,9 +68,10 @@
 
                         <!--Element 表格渲染  :data= 表格的对象数组  prop=对应对象中的键名即可填入数据  label = th属性来定义表格的列名-->
                         <el-table :data="posts" border style="width: 100%">
-                            <el-table-column  prop="id" label="ID" width="40">
+                            <el-table-column type="selection" width="35"> </el-table-column>
+                            <el-table-column  prop="id" label="ID" width="40" type="index" :index="0">
                             </el-table-column>
-                            <el-table-column  prop="title" label="标题" width="140">
+                            <el-table-column  prop="title" label="标题" width="120">
                             </el-table-column>
                             <el-table-column  prop="body" label="内容" width="180">
                             </el-table-column>
@@ -77,11 +79,18 @@
                             </el-table-column>
                             <el-table-column  label="操作" width="180">
                                 <template slot-scope="scope">
-                                    <el-button  >编辑</el-button>
+                                    <el-button  @click="showTableDialog2(scope.$index,  scope.row)">编辑</el-button>
                                     <el-button  >删除</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
+                        <!--  start 表格多选  -->
+                        <!-- <div style="margin-top: 20px">
+                            <el-button @click="toggleSelection([posts])">全选</el-button>
+                            <el-button @click="toggleSelection()">确定</el-button>
+                        </div> -->
+                        <!--  end 表格多选  -->
+                        
                         <!--Element 表格渲染 -->
                         <!--Element 分页-->
                         <el-pagination background layout="total, prev, pager, next, jumper"  :total="total"   :page-size="pagesize"  
@@ -182,6 +191,9 @@
     .el-dialog .el-textarea__inner {
         width: 450px;
     }
+    /* body {
+        margiin: 0;
+    } */
 </style>
 <script>
     const str = 'abcdefghijklmn';
@@ -242,6 +254,7 @@
                         { required: true, message: '请填写活动形式', trigger: 'blur' }
                     ]
                 },
+                fullscreenLoading: false,
             }
         },
         mounted() {
@@ -249,6 +262,13 @@
             this.initShow(1);
         },
         methods: {
+            loading() {
+                // loading: true
+                this.fullscreenLoading = true;
+                setTimeout(() => {
+                    this.fullscreenLoading = false;
+                }, 2000);
+            },
             onSubmit() {
                 console.log('submit!');
                 console.log(this.formInline.region);
@@ -264,10 +284,29 @@
                     console.log(this.posts);
                 })
             },
+            showTableDialog(params) { //绑定表单 弹框参数
+                this.dialogFormVisible = true;
+                console.log(params);
+                this.dialogEdit = params;
+            },
+            showTableDialog2(index, row) { //绑定表单 弹框参数 Element表单获取的index是表单的索引  row是表单一行的数据
+                console.log(index);
+                console.log(row);
+            },
+            // toggleSelection(rows) { //全选 错误的
+            //     if (rows) {
+            //     rows.forEach(row => {
+            //         this.$refs.multipleTable.toggleRowSelection(row);
+            //     });
+            //     } else {
+            //     this.$refs.multipleTable.clearSelection();
+            //     }
+            // },
             edit() {
-                // this.dialogFormVisible = false;
-                console.log(this.dialogEdit);
-                var formData = this.dialogEdit;
+               
+                this.dialogFormVisible = false;
+                // console.log(this.dialogEdit);
+                // var formData = this.dialogEdit;
                 axios.post('/api/verify', formData).then(res => {
                     console.log(res);
                 });
