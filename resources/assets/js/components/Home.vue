@@ -290,6 +290,8 @@
                 this.dialogEdit = params;
             },
             showTableDialog2(index, row) { //绑定表单 弹框参数 Element表单获取的index是表单的索引  row是表单一行的数据
+                this.dialogFormVisible = true;
+                this.dialogEdit = row;
                 console.log(index);
                 console.log(row);
             },
@@ -328,11 +330,33 @@
                 });          
                 });
             },
-            submitForm() {
-                console.log('还没有写表单方法');
-            },
-            resetForm() {
-                console.log('重置表单方法');
+            //判断请求表单参数
+            submitForm(releForms) {
+                var releForm = this.ruleForm;
+                console.log(releForm);
+                //这个方法是判断表单是否成功的
+                this.$refs[releForms].validate((valid) => {
+                    if (valid) { //如果valid是true
+                        console.log('success');
+                        console.log(valid);
+                    } else { //验证没有通过
+                        console.log('error submit!!');
+                        return false;
+                    }
+
+                    // if(!valid) { //如果验证没有通过
+                    //     console.log('error submit!!');
+                    //     return false;
+                    // }
+
+                    // console.log('success');
+                    // console.log(valid);
+
+                });
+            }, 
+            //重置方法 一定要加ref这个属性
+            resetForm(releForm) {
+                this.$refs[releForm].resetFields();
             }
         }
     }
