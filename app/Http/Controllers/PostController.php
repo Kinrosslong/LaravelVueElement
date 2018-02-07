@@ -62,11 +62,11 @@ class PostController extends Controller
         ]);
 
         
-        // return response()->json([
-        //     'success' => true,
-        //     'status' => 200,
-        //     'msg' => 'ok'
-        // ]);
+        return response()->json([
+            'success' => true,
+            'status' => 200,
+            'msg' => 'ok'
+        ]);
     }
 
 

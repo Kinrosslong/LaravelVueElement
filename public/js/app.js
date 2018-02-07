@@ -36758,7 +36758,7 @@ exports = module.exports = __webpack_require__(54)(undefined);
 
 
 // module
-exports.push([module.i, "\n.el-dialog .el-input__inner {\n    width: 450px;\n}\n.el-dialog .el-textarea__inner {\n    width: 450px;\n}\n", ""]);
+exports.push([module.i, "\n.el-dialog .el-input__inner {\n    width: 450px;\n}\n.el-dialog .el-textarea__inner {\n    width: 450px;\n}\n/* body {\n    margiin: 0;\n} */\n", ""]);
 
 // exports
 
@@ -37208,6 +37208,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var str = 'abcdefghijklmn';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37251,7 +37263,8 @@ var str = 'abcdefghijklmn';
                 type: [{ type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }],
                 resource: [{ required: true, message: '请选择活动资源', trigger: 'change' }],
                 desc: [{ required: true, message: '请填写活动形式', trigger: 'blur' }]
-            }
+            },
+            fullscreenLoading: false
         };
     },
     mounted: function mounted() {
@@ -37260,40 +37273,67 @@ var str = 'abcdefghijklmn';
     },
 
     methods: {
+        loading: function loading() {
+            var _this = this;
+
+            // loading: true
+            this.fullscreenLoading = true;
+            setTimeout(function () {
+                _this.fullscreenLoading = false;
+            }, 2000);
+        },
         onSubmit: function onSubmit() {
             console.log('submit!');
             console.log(this.formInline.region);
             console.log(this.formInline.user);
         },
         initShow: function initShow(pagenum) {
-            var _this = this;
+            var _this2 = this;
 
             // axios.post('/api/posts',{params:{pagenum:pagenum, pagesize:this.pagesize}}).then(res => { //get请求
             axios.post('/api/posts', { pagenum: pagenum, pagesize: this.pagesize }).then(function (res) {
                 //post 请求
 
                 console.log(res);
-                _this.posts = res.data.list;
-                _this.total = res.data.count;
-                console.log(_this.posts);
+                _this2.posts = res.data.list;
+                _this2.total = res.data.count;
+                console.log(_this2.posts);
             });
         },
+        showTableDialog: function showTableDialog(params) {
+            //绑定表单 弹框参数
+            this.dialogFormVisible = true;
+            console.log(params);
+            this.dialogEdit = params;
+        },
+        showTableDialog2: function showTableDialog2(index, row) {
+            //绑定表单 弹框参数 Element表单获取的index是表单的索引  row是表单一行的数据
+            this.dialogFormVisible = true;
+            this.dialogEdit = row;
+            console.log(index);
+            console.log(row);
+        },
+
+        // toggleSelection(rows) { //全选 错误的
+        //     if (rows) {
+        //     rows.forEach(row => {
+        //         this.$refs.multipleTable.toggleRowSelection(row);
+        //     });
+        //     } else {
+        //     this.$refs.multipleTable.clearSelection();
+        //     }
+        // },
         edit: function edit() {
-            // this.dialogFormVisible = false;
-            console.log(this.dialogEdit);
-            var formData = this.dialogEdit;
+
+            this.dialogFormVisible = false;
+            // console.log(this.dialogEdit);
+            // var formData = this.dialogEdit;
             axios.post('/api/verify', formData).then(function (res) {
-                console.log(456789123);
-                // console.log(res.errors);
-
-                // console.log(res.response.status);
-                // if() {
-
-                // }
+                console.log(res);
             });
         },
         MessageBox: function MessageBox() {
-            var _this2 = this;
+            var _this3 = this;
 
             //弹框
             this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -37301,22 +37341,47 @@ var str = 'abcdefghijklmn';
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(function () {
-                _this2.$message({
+                _this3.$message({
                     type: 'success',
                     message: '删除成功!'
                 });
             }).catch(function () {
-                _this2.$message({
+                _this3.$message({
                     type: 'info',
                     message: '已取消删除'
                 });
             });
         },
-        submitForm: function submitForm() {
-            console.log('还没有写表单方法');
+
+        //判断请求表单参数
+        submitForm: function submitForm(releForms) {
+            var releForm = this.ruleForm;
+            console.log(releForm);
+            //这个方法是判断表单是否成功的
+            this.$refs[releForms].validate(function (valid) {
+                if (valid) {
+                    //如果valid是true
+                    console.log('success');
+                    console.log(valid);
+                } else {
+                    //验证没有通过
+                    console.log('error submit!!');
+                    return false;
+                }
+
+                // if(!valid) { //如果验证没有通过
+                //     console.log('error submit!!');
+                //     return false;
+                // }
+
+                // console.log('success');
+                // console.log(valid);
+            });
         },
-        resetForm: function resetForm() {
-            console.log('重置表单方法');
+
+        //重置方法 一定要加ref这个属性
+        resetForm: function resetForm(releForm) {
+            this.$refs[releForm].resetFields();
         }
     }
 });
@@ -37479,7 +37544,25 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("el-tag", { attrs: { type: "danger" } }, [_vm._v("Tag标签")])
+              _c("el-tag", { attrs: { type: "danger" } }, [_vm._v("Tag标签")]),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  directives: [
+                    {
+                      name: "loading",
+                      rawName: "v-loading.fullscreen.lock",
+                      value: _vm.fullscreenLoading,
+                      expression: "fullscreenLoading",
+                      modifiers: { fullscreen: true, lock: true }
+                    }
+                  ],
+                  attrs: { type: "primary" },
+                  on: { click: _vm.loading }
+                },
+                [_vm._v("Loading加载")]
+              )
             ],
             1
           ),
@@ -37520,7 +37603,7 @@ var render = function() {
                                 attrs: { type: "button" },
                                 on: {
                                   click: function($event) {
-                                    _vm.dialogFormVisible = true
+                                    _vm.showTableDialog(post)
                                   }
                                 }
                               },
@@ -37556,11 +37639,21 @@ var render = function() {
                 },
                 [
                   _c("el-table-column", {
-                    attrs: { prop: "id", label: "ID", width: "40" }
+                    attrs: { type: "selection", width: "35" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { prop: "title", label: "标题", width: "140" }
+                    attrs: {
+                      prop: "id",
+                      label: "ID",
+                      width: "40",
+                      type: "index",
+                      index: 0
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { prop: "title", label: "标题", width: "120" }
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
@@ -37582,7 +37675,20 @@ var render = function() {
                         key: "default",
                         fn: function(scope) {
                           return [
-                            _c("el-button", [_vm._v("编辑")]),
+                            _c(
+                              "el-button",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.showTableDialog2(
+                                      scope.$index,
+                                      scope.row
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("编辑")]
+                            ),
                             _vm._v(" "),
                             _c("el-button", [_vm._v("删除")])
                           ]
