@@ -21,3 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/posts', 'PostController@index'); //post请求
 Route::get('/posts/{post}', 'PostController@show');
 Route::post('/verify', 'PostController@verify'); //测试Laravel validate 表单验证
+// Route::post('/register', 'Auth\RegisterController@register'); //注册
+Route::post('/register', 'PostController@register'); //注册
+Route::post('/login', 'Auth\LoginController@login'); //登陆
+// Route::post('/login', 'LoginController@login'); //登陆
+

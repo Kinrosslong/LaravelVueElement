@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Proxy\TokenProxy;
+use App\Http\TokenProxy;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    /*
+
+
+
+  /*
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
@@ -20,13 +23,14 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-    protected $proxy;
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
     protected $redirectTo = '/home';
+    protected $proxy;
 
     /**
      * Create a new controller instance.
@@ -48,6 +52,12 @@ class LoginController extends Controller
     public function login()
     {
 //        $this->validateLogin(Request());
-        return $this->proxy->login(request('email'), request('password'));
+        return $this->proxy->proxy('password', [
+            'username' => request('email'),
+            'password' => request('password'),
+            'scope' => ''
+        ]);
     }
+
+    
 }

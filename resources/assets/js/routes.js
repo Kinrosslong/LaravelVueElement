@@ -8,6 +8,16 @@ let routes = [
     {
         path: '/about',
         component: require('./components/About')
+    },
+    {
+        path: '/register',
+        name: 'regist',
+        component: require('./components/register/Register')
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: require('./components/login/Login')
     }
 ]
 export default new VueRouter({

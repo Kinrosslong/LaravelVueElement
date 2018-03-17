@@ -65,14 +65,14 @@ class Handler extends ExceptionHandler
         // }
 
         //判断如果是Ajax请求就走这里
-        if($request->ajax()) {
-//        if(Request()->ajax()) { //这里也是可以的
-            return response()->json([
-                'status'=> $exception->status,
-                'msg' => $exception->getMessage(),
-                'errors' => $exception->errors(),
-            ], $exception->status);
-        }
+//         if($request->ajax()) {
+// //        if(Request()->ajax()) { //这里也是可以的
+//             return response()->json([
+//                 'status'=> $exception->status,
+//                 'msg' => $exception->getMessage(),
+//                 'errors' => $exception->errors(),
+//             ], $exception->status);
+//         }
 
         return parent::render($request, $exception);
     }

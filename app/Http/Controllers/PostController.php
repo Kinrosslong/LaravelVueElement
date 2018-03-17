@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\User;
+use Illuminate\Auth\Events\Registered;
 
 class PostController extends Controller
 {
@@ -75,4 +77,37 @@ class PostController extends Controller
 //        Request::
 
     }
+
+
+    public function register(Request $request)
+    {
+        
+        
+        // return response()->json([
+        //     'success' => true,
+        //     'status' => 200,
+        //     'msg' => 'user created!'
+        // ]);
+        // $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return response()->json([
+            'success' => true,
+            'status' => 200,
+            'msg' => 'user created!'
+        ]);
+    }
+
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+    }
+
+
+    
 }
