@@ -49,4 +49,33 @@ class TokenProxy {
             'msg' => '登陆失败',
         ],421);
     }
+
+
+    public function logout()
+    {
+        $user = auth()->guard('api')->user();
+        $accessToken = $user->token();
+        app('db')->table('oauth_refresh_tokens')
+                         ->where('access_token_id', $accessToken->id)
+                         ->update([
+                             'revoked' => true
+                         ]);
+        app('cookie')->forget('refreshToken');
+        $accessToken->revoke();
+        return response()->json([
+            'status' => 'success',
+            'status_code' => 200,
+            'message' => 'logout success'
+            ]
+        ,200);
+    }
+
+    public function refresh()
+    {
+        $refreshToken = request()->cookie('refreshToken');
+        return $this->proxy('refresh_token',
+            ['refresh_token' => $refreshToken]);
+    }
+
+
 }
