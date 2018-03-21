@@ -26,3 +26,5 @@ Route::post('/register', 'PostController@register'); //注册
 Route::post('/login', 'Auth\LoginController@login'); //登陆
 // Route::post('/login', 'LoginController@login'); //登陆
 
+Route::get('/about', 'PostController@about');
+Route::post('/testValidate', 'PostController@verify'); //测试Laravel验证规则

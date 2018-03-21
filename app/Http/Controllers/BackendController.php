@@ -37,6 +37,9 @@ class BackendController extends Controller
 
         echo URL::current();
 
+        dump( __DIR__);
+        // dd(__DIR__);
+        // dd(123456);
         // $url = action('HomeController@index');
     }
 

@@ -178,6 +178,24 @@
                         <!-- Element Dialog对话框 -->
 
                         <!--测试一下github-->
+
+                        <!--laravel 测试规则验证-->
+                            
+                        <el-form :inline="true" :model="formInline" class="demo-form-inline">
+                            <el-form-item label="标题">
+                                <el-input v-model="formInline.title" placeholder="标题"></el-input>
+                            </el-form-item>
+                            <el-form-item label="内容">
+                                <el-input type="textarea"  placeholder="内容" v-model="formInline.body">
+                                </el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="onSubmit">查询</el-button>
+                            </el-form-item>
+                        </el-form>
+
+                        <!--laravel 测试规则验证-->
+
                     </div>
                 </div>
             </div>
@@ -255,6 +273,10 @@
                     ]
                 },
                 fullscreenLoading: false,
+                formInline: {
+                    title: '',
+                    body: ''
+                }
             }
         },
         mounted() {
@@ -357,6 +379,13 @@
             //重置方法 一定要加ref这个属性
             resetForm(releForm) {
                 this.$refs[releForm].resetFields();
+            },
+            onSubmit() {
+                let formData = this.formInline;
+                console.log(formData);
+                axios.post('api/testValidate', formData).then(res => {
+                    consele.log(res.data);
+                });
             }
         }
     }

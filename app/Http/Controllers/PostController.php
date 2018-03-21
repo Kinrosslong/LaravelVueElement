@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Validation\ValidationException;
+use Exception;
+use App\Http\Requests\StoreBlogPost;
 
 class PostController extends Controller
 {
@@ -25,9 +28,10 @@ class PostController extends Controller
         return ['list' => $users, 'count' => $count];
     }
 
-    public function show(Post $post)
+    public function show()
     {
-        return $post;
+        // return $post;
+        return response()->json($exception->errors(), $exception->status);
     }
 
     public function demo() 
@@ -53,17 +57,14 @@ class PostController extends Controller
         ];
     }
 
-    public function verify(Request $request)
+    /**
+     * Get the validation rules that apply to the request.
+     * 测试验证规则 获取应用于请求的验证规则。
+     *
+     * @return array
+     */
+    public function verify(StoreBlogPost $request)
     {    
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'body' => 'required',
-            // 'name' => 'required',
-            'body' => 'required',
-            'region' => 'required',
-        ]);
-
-        
         return response()->json([
             'success' => true,
             'status' => 200,
@@ -72,13 +73,19 @@ class PostController extends Controller
     }
 
 
-    public function about()
+    public function about( )
     {
 //        Request::
-
+        return ['a', 4, 9, 0];
+        return response()->json($exception->errors(), $exception->status);
     }
 
 
+    /**
+     * 注册用户
+     *
+     * @return array
+     */
     public function register(Request $request)
     {
         
@@ -99,6 +106,11 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * 注册用户
+     *
+     * @return array
+     */
     protected function create(array $data)
     {
         return User::create([

@@ -37031,6 +37031,26 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37232,7 +37252,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var str = 'abcdefghijklmn';
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {
+        return _defineProperty({
             posts: [],
             radio: '1',
             input: '123',
@@ -37273,14 +37293,17 @@ var str = 'abcdefghijklmn';
                 desc: [{ required: true, message: '请填写活动形式', trigger: 'blur' }]
             },
             fullscreenLoading: false
-        };
+        }, 'formInline', {
+            title: '',
+            body: ''
+        });
     },
     mounted: function mounted() {
         // console.log('Home 页面.')
         this.initShow(1);
     },
 
-    methods: {
+    methods: _defineProperty({
         loading: function loading() {
             var _this = this;
 
@@ -37391,7 +37414,13 @@ var str = 'abcdefghijklmn';
         resetForm: function resetForm(releForm) {
             this.$refs[releForm].resetFields();
         }
-    }
+    }, 'onSubmit', function onSubmit() {
+        var formData = this.formInline;
+        console.log(formData);
+        axios.post('api/testValidate', formData).then(function (res) {
+            consele.log(res.data);
+        });
+    })
 });
 
 /***/ }),
@@ -38133,6 +38162,67 @@ var render = function() {
                   )
                 ],
                 1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form",
+                {
+                  staticClass: "demo-form-inline",
+                  attrs: { inline: true, model: _vm.formInline }
+                },
+                [
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "标题" } },
+                    [
+                      _c("el-input", {
+                        attrs: { placeholder: "标题" },
+                        model: {
+                          value: _vm.formInline.title,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formInline, "title", $$v)
+                          },
+                          expression: "formInline.title"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "内容" } },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "textarea", placeholder: "内容" },
+                        model: {
+                          value: _vm.formInline.body,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formInline, "body", $$v)
+                          },
+                          expression: "formInline.body"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: { type: "primary" },
+                          on: { click: _vm.onSubmit }
+                        },
+                        [_vm._v("查询")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             2
@@ -38249,7 +38339,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         // console.log('this is About')
-        axios.get('/api/posts').then(function (res) {
+        axios.get('/api/about').then(function (res) {
             console.log(res);
             _this.posts = res.data;
             console.log(res.data);

@@ -20,7 +20,7 @@
     export default {
         mounted() {
             // console.log('this is About')
-              axios.get('/api/posts').then(res => {
+              axios.get('/api/about').then(res => {
                 console.log(res);
                 this.posts = res.data;
                 console.log(res.data);
