@@ -190,7 +190,7 @@
                                 </el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-button type="primary" @click="onSubmit">查询</el-button>
+                                <el-button type="primary" @click="formvalid">查询</el-button>
                             </el-form-item>
                         </el-form>
 
@@ -380,10 +380,10 @@
             resetForm(releForm) {
                 this.$refs[releForm].resetFields();
             },
-            onSubmit() {
+            formvalid() {
                 let formData = this.formInline;
                 console.log(formData);
-                axios.post('api/testValidate', formData).then(res => {
+                axios.post('api/fromvalid', formData).then(res => {
                     consele.log(res.data);
                 });
             }

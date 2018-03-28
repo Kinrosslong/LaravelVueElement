@@ -20,6 +20,25 @@
 */
 Route::get('/backend', 'BackendController@index');
 Route::get('/backend/demo', 'BackendController@demo');
+Route::get('/foo/index', function () {
+    return 'Hello World';
+});
+
+Route::get('tencent/{id}', function ($id = null) {
+    return "Tencent ". $id;
+});
+
+Route::get('testmiddleware/{age}', 'BackendController@testmiddleware');
+Route::get('urltest', 'BackendController@urltest');
+Route::get('redir', 'BackendController@redir');
+Route::get('welcome', 'BackendController@welcome');
+Route::get('redis', 'BackendController@redis');
+Route::get('phpinfo', 'BackendController@phpinfo');
+Route::get('fromvalid', 'BackendController@fromvalid');
+Route::get('demo', 'BackendController@demo');
+
+
+
 
 // Route::get('/posts', 'PostController@index'); //指定路由
 
@@ -30,3 +49,6 @@ Route::any('{all}', function () {
 
 
 // Route::get('demo', 'PostController@demo');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

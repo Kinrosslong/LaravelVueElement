@@ -28,3 +28,4 @@ Route::post('/login', 'Auth\LoginController@login'); //登陆
 
 Route::get('/about', 'PostController@about');
 Route::post('/testValidate', 'PostController@verify'); //测试Laravel验证规则
+Route::post('/fromvalid', 'BackendController@fromvalid'); //测试Laravel验证规则

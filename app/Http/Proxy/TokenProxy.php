@@ -9,6 +9,7 @@ class TokenProxy {
     {
         $this->http = $http;
     }
+
     /**
      * @desc 用来做代理登陆获取token
      * @Date: 2018-03-17
@@ -33,7 +34,11 @@ class TokenProxy {
         ])->cookie('refreshToken', $token['refresh_token'], 86399, null, null, false, true);
     }
 
-
+    /**
+     * @desc 登陆
+     * @Date: 2018-03-17
+     * @return mixed
+     */
     public function login($email, $password)
     {   
          if(Auth()->attempt(['email' => $email, 'password' => $password, 'is_active' => 1])) {
@@ -50,7 +55,11 @@ class TokenProxy {
         ],421);
     }
 
-
+    /**
+     * @desc 退出
+     * @Date: 2018-03-17
+     * @return mixed
+     */
     public function logout()
     {
         $user = auth()->guard('api')->user();
@@ -70,6 +79,11 @@ class TokenProxy {
         ,200);
     }
 
+    /**
+     * @desc 换取token access_token refresh_token
+     * @Date: 2018-03-17
+     * @return mixed
+     */
     public function refresh()
     {
         $refreshToken = request()->cookie('refreshToken');

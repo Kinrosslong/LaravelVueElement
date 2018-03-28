@@ -103,5 +103,18 @@ class Handler extends ExceptionHandler
     //         'errors' => $exception->errors(),
     //     ], $exception->status);
     // }
+
+
+    /**
+     * 将验证异常转换成 JSON 响应
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return response()->json($exception->errors(), $exception->status);
+    }
     
 }

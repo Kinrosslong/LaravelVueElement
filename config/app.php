@@ -38,8 +38,8 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
-
-    'debug' => env('APP_DEBUG', false),
+    //对于本地开发，应该将 APP_DEBUG 环境变量设置为 true 。而在生产环境中，此值应始终保持 false
+    'debug' => env('APP_DEBUG', true ),
 
     /*
     |--------------------------------------------------------------------------

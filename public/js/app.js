@@ -37303,7 +37303,7 @@ var str = 'abcdefghijklmn';
         this.initShow(1);
     },
 
-    methods: _defineProperty({
+    methods: {
         loading: function loading() {
             var _this = this;
 
@@ -37413,14 +37413,15 @@ var str = 'abcdefghijklmn';
         //重置方法 一定要加ref这个属性
         resetForm: function resetForm(releForm) {
             this.$refs[releForm].resetFields();
+        },
+        formvalid: function formvalid() {
+            var formData = this.formInline;
+            console.log(formData);
+            axios.post('api/fromvalid', formData).then(function (res) {
+                consele.log(res.data);
+            });
         }
-    }, 'onSubmit', function onSubmit() {
-        var formData = this.formInline;
-        console.log(formData);
-        axios.post('api/testValidate', formData).then(function (res) {
-            consele.log(res.data);
-        });
-    })
+    }
 });
 
 /***/ }),
@@ -38214,7 +38215,7 @@ var render = function() {
                         "el-button",
                         {
                           attrs: { type: "primary" },
-                          on: { click: _vm.onSubmit }
+                          on: { click: _vm.formvalid }
                         },
                         [_vm._v("查询")]
                       )
