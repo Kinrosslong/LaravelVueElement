@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
+     * 允许赋值的字段
      * @var array
      */
     protected $fillable = [
@@ -21,7 +21,7 @@ class User extends Authenticatable
 
     /**
      * The attributes that should be hidden for arrays.
-     *
+     * 应该为数组隐藏的属性。
      * @var array
      */
     protected $hidden = [

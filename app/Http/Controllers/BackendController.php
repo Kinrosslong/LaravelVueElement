@@ -195,6 +195,10 @@ class BackendController extends Controller
 
         $data = DB::table('posts')->where('title', '=', 'this is test')->get();
         dump($data);
+        echo "<hr/>";
+        $item = DB::table('posts')->limit(10)->get();
+        dump($item);
+        dump($item->toJson());
         // phpinfo(); 
     }
 
