@@ -214,6 +214,7 @@ class BackendController extends Controller
         echo "试试 mac上的git提交";
         echo "试试拉取"；
         echo "试试拉取"；
+        echo "Mac pc端编辑"；
     }
 
 
