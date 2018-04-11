@@ -212,6 +212,7 @@ class BackendController extends Controller
     public function mactest()
     {
         echo "试试 mac上的git提交";
+        echo "试试拉取"；
     }
 
 
