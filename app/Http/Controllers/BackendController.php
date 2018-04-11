@@ -208,4 +208,14 @@ class BackendController extends Controller
         $user = Auth::user();
         dump($user);
     }
+
+    public function mactest()
+    {
+        echo "试试 mac上的git提交";
+    }
+
+
+
+
+
 }
