@@ -216,6 +216,7 @@ class BackendController extends Controller
         echo "试试拉取"；
         echo "Mac pc端编辑"；
         echo “mac test”；
+        echo "mac test"；
     }
 
 
